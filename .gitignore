@@ -97,6 +97,3 @@ typings/
 
 # .env file
 .env
-
-# logs
-logs/

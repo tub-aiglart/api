@@ -2,17 +2,11 @@ async function routes (app, options) {
   app.route({
     method: 'GET',
     url: '/validate',
-    handler: async (request, reply) => {
+    handler: (request, reply) => {
       if (options.API.tokenVerificator.verifyAccessToken(request)) {
-        reply.type('application/json').status(200);
-        return {
-          message: 'token_valid'
-        };
+        reply.type('application/json').status(200).send({ message: 'token_valid' });
       } else {        
-        reply.type('application/json').status(401);
-        return {
-          message: 'token_invalid'
-        };
+        reply.type('application/json').status(401).send({ message: 'token_invalid' });
       }
     }
   });

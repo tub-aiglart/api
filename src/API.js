@@ -29,6 +29,8 @@ class API {
   async initialize() {
     this.app.register(require('./io/Database'));
     this.app.register(require('fastify-cors'));
+    this.app.register(require('fastify-file-upload'));
+    
     await fs.readdir('./src/routes/', async (err, routes) => {
       if (err) {
         this.app.log.error(err);

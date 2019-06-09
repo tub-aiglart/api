@@ -2,28 +2,21 @@
   "name": "@tub/api",
   "version": "0.1.0",
   "description": "A fast and reliable API for serving images",
-  "main": "server.js",
+  "author": "Rxsto <oz@farfrom.social> (https://rxsto.me)",
   "scripts": {
     "test": "nodemon index",
     "start": "node index",
-    "lint": "eslint . --fix --ext .js --ignore-path .gitignore"
+    "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Rxsto/tub-api.git"
+    "url": "git+https://github.com/tub-aiglart/api.git"
   },
-  "keywords": [
-    "tub"
-  ],
-  "author": "Rxsto <oz@farfrom.social> (https://rxsto.me)",
-  "bugs": {
-    "url": "https://github.com/Rxsto/tub-api/issues"
-  },
-  "homepage": "https://github.com/Rxsto/tub-api#readme",
   "dependencies": {
     "dotenv": "^8.0.0",
     "fastify": "^2.4.1",
     "fastify-cors": "^2.1.3",
+    "fastify-file-upload": "^1.0.0",
     "fastify-mongodb": "^1.0.1",
     "flakeid": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
