@@ -49,7 +49,7 @@ class API {
   }
 
   async launch() {
-    await this.app.listen(process.env.APP_PORT).catch(err => {
+    await this.app.listen(process.env.APP_PORT, process.env.APP_HOST).catch(err => {
       this.app.log.error(err);
       process.exit(1);
     });
