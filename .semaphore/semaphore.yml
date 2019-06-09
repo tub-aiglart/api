@@ -16,5 +16,5 @@ blocks:
           commands:
             - checkout
             - docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
-            - docker build -t rxsto/tub-api:$SEMAPHORE_GIT_SHA .
-            - docker push rxsto/tub-api:$SEMAPHORE_GIT_SHA
+            - docker build -t rxsto/tub-api:latest .
+            - docker push rxsto/tub-api:latest
