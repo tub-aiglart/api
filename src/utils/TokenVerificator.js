@@ -9,9 +9,8 @@ class TokenVerificator {
   }
 
   verifyAccessToken(request) {
-    const token = request.req.headers['authorization'].split(' ')[1];
     try {
-      const payload = JWT.verify(token, Secret);
+      const payload = JWT.verify(request.req.headers['authorization'].split(' ')[1], Secret);
       if (payload['type'] !== 'access') {
         return false;
       }
@@ -22,9 +21,8 @@ class TokenVerificator {
   }
 
   verifyRefreshToken(request) {
-    const token = request.req.headers['authorization'].split(' ')[1];
     try {
-      const payload = JWT.verify(token, Secret);
+      const payload = JWT.verify(request.req.headers['authorization'].split(' ')[1], Secret);
       if (payload['type'] !== 'refresh') {
         return false;
       }

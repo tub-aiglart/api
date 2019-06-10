@@ -10,6 +10,13 @@ async function routes (app, options) {
   app.route({
     method: 'POST',
     url: '/image',
+    preHandler: (request, reply, done) => {
+      if(options.API.tokenVerificator.verifyAccessToken(request)) {
+        done();
+      } else {
+        reply.type('application/json').status(401).send({ message: 'invalid_token' });
+      }
+    },
     handler: (request, reply) => {
       const file = request.raw.files.file;
       const data = request.raw.body;
