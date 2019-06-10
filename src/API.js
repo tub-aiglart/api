@@ -28,7 +28,7 @@ class API {
 
   async initialize() {
     this.app.register(require('./io/Database'));
-    this.app.register(require('fastify-cors'));
+    this.app.register(require('fastify-cors'), { origin: true });
     this.app.register(require('fastify-file-upload'), { limits: { fileSize: 5 * 1024 * 1024 * 1024}});
     
     await fs.readdir('./src/routes/', async (err, routes) => {
