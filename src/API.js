@@ -31,10 +31,8 @@ class API {
     this.app.register(require('fastify-cors'), { origin: true });
     this.app.register(require('fastify-file-upload'), { limits: { fileSize: 5 * 1024 * 1024 * 1024}});
     
-    await fs.readdir('./src/routes/', async (err, routes) => {
-      if (err) {
-        this.app.log.error(err);
-      }
+    await fs.readdir('./src/routes/', async (error, routes) => {
+      if (error) throw error;
   
       routes.forEach(route => {
         this.app.register(require(`./routes/${route}`), { API: this });
