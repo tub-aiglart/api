@@ -16,7 +16,7 @@ async function routes (app, options) {
       }
     },
     handler: (request, reply) => {
-      const data = request.raw.body;
+      const data = request.body;
       const id = options.API.snowflakeGenerator.generateSnowflake();
 
       options.API.exhibitionCache.add(new ExhibitionEntity(id, data));
