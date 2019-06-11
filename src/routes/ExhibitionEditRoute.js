@@ -1,4 +1,4 @@
-const ExhibitionEntitiy = require('../entities/ExhibitionEntitiy');
+const ExhibitionEntitiy = require('../entities/ExhibitionEntity');
 
 async function routes (app, options) {
   app.route({
