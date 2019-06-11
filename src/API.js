@@ -21,8 +21,8 @@ class API {
     this.tokenGenerator = new TokenGenerator(this);
     this.tokenVerificator = new TokenVerificator(this);
     this.snowflakeGenerator = new SnowflakeGenerator(this);
-    this.imageCache = new Cache(this);
     this.userCache = new Cache(this);
+    this.imageCache = new Cache(this);
     this.exhibitionCache = new Cache(this);
   }
 
@@ -41,8 +41,8 @@ class API {
 
     await this.launch();
 
-    this.imageCache.initialize(this.app.database.db('tub').collection('images'));
     this.userCache.initialize(this.app.database.db('tub').collection('users'));
+    this.imageCache.initialize(this.app.database.db('tub').collection('images'));
     this.exhibitionCache.initialize(this.app.database.db('tub').collection('exhibitions'));
   }
 
