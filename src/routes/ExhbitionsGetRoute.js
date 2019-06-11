@@ -1,7 +1,7 @@
 async function routes (app) {
   app.route({
     method: 'GET',
-    url: '/exhibtions',
+    url: '/exhibitions',
     handler: (request, reply) => {      
       app.database.db('tub').collection('exhibitions').find({}).toArray((error, result) => {
         if (error) throw error;
