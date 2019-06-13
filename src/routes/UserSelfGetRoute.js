@@ -1,9 +1,9 @@
-const ImageEntity = require('../entities/ImageEntity');
+const JWT = require('jsonwebtoken');
 
 async function routes (app, options) {
   app.route({
-    method: 'PATCH',
-    url: '/image/:id',
+    method: 'GET',
+    url: '/users/@me',
     preHandler: (request, reply, done) => {
       if(options.API.tokenVerificator.verifyAccessToken(request)) {
         done();
@@ -12,9 +12,8 @@ async function routes (app, options) {
       }
     },
     handler: (request, reply) => {
-      const image = options.API.imageCache.get(request.params.id);
-      options.API.imageCache.add(new ImageEntity(image.id, request.body, { extension: image.extension }));
-      reply.type('application/json').status(200).send({ message: 'success' });
+      const id = JWT.verify(request.req.headers['authorization'].split(' ')[1], process.env.JWT_SECRET)['sub'];
+      reply.type('application/json').status(200).send(options.API.userCache.get(id));
     }
   });
 }

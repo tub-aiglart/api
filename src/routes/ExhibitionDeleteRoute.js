@@ -1,9 +1,7 @@
-const fs = require('fs');
-
 async function routes (app, options) {
   app.route({
     method: 'DELETE',
-    url: '/image/:id',
+    url: '/exhibition/:id',
     preHandler: (request, reply, done) => {
       if(options.API.tokenVerificator.verifyAccessToken(request)) {
         done();
@@ -12,11 +10,8 @@ async function routes (app, options) {
       }
     },
     handler: (request, reply) => {
-      const image = options.API.imageCache.get(request.params.id);
-      fs.unlink(process.env.CDN_PATH + image.id + image.extension, (error) => {
-        if (error) throw error;
-      });
-      options.API.imageCache.remove(image);
+      const exhibition = options.API.exhibitionCache.get(request.params.id);
+      options.API.exhibitionCache.remove(exhibition);
       reply.type('application/json').status(200).send({ message: 'success' });
     }
   });

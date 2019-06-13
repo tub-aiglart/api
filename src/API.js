@@ -21,20 +21,18 @@ class API {
     this.tokenGenerator = new TokenGenerator(this);
     this.tokenVerificator = new TokenVerificator(this);
     this.snowflakeGenerator = new SnowflakeGenerator(this);
-    this.imageCache = new Cache(this);
     this.userCache = new Cache(this);
+    this.imageCache = new Cache(this);
     this.exhibitionCache = new Cache(this);
   }
 
   async initialize() {
     this.app.register(require('./io/Database'));
-    this.app.register(require('fastify-cors'));
-    this.app.register(require('fastify-file-upload'));
+    this.app.register(require('fastify-cors'), { origin: true });
+    this.app.register(require('fastify-file-upload'), { limits: { fileSize: 5 * 1024 * 1024 * 1024}});
     
-    await fs.readdir('./src/routes/', async (err, routes) => {
-      if (err) {
-        this.app.log.error(err);
-      }
+    await fs.readdir('./src/routes/', async (error, routes) => {
+      if (error) throw error;
   
       routes.forEach(route => {
         this.app.register(require(`./routes/${route}`), { API: this });
@@ -43,13 +41,13 @@ class API {
 
     await this.launch();
 
-    this.imageCache.initialize(this.app.database.db('tub').collection('images'));
     this.userCache.initialize(this.app.database.db('tub').collection('users'));
+    this.imageCache.initialize(this.app.database.db('tub').collection('images'));
     this.exhibitionCache.initialize(this.app.database.db('tub').collection('exhibitions'));
   }
 
   async launch() {
-    await this.app.listen(process.env.APP_PORT).catch(err => {
+    await this.app.listen(process.env.APP_PORT, process.env.APP_HOST).catch(err => {
       this.app.log.error(err);
       process.exit(1);
     });
