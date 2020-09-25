@@ -2,7 +2,7 @@
   "name": "@tub/api",
   "version": "0.1.0",
   "description": "A fast and reliable API for serving images",
-  "author": "Rxsto <oz@farfrom.social> (https://rxsto.me)",
+  "author": "rxsto <hi@rxs.to> (https://rxs.to)",
   "scripts": {
     "test": "nodemon index",
     "start": "node index",
