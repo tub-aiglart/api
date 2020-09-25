@@ -27,6 +27,8 @@ class API {
   }
 
   async initialize() {
+    this.app.log.info('Initializing tub API...');
+
     this.app.register(require('./io/Database'));
     this.app.register(require('fastify-cors'), { origin: true });
     this.app.register(require('fastify-file-upload'), { limits: { fileSize: 5 * 1024 * 1024 * 1024}});
